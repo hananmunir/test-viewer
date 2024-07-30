@@ -12,7 +12,7 @@ function ARButton() {
   return (
     <button
       onClick={() => store.enterAR()}
-      className="absolute top-0 right-0 m-4 p-2 bg-gray-500 text-white rounded-lg"
+      className="absolute top-0 right-0 m-4 p-2 bg-gray-500 text-white rounded-lg z-50"
     >
       Enter AR
     </button>
