@@ -19,24 +19,40 @@ function ARButton() {
   );
 }
 
-function Scene({ model }) {
+function Scene() {
+  const [red, setRed] = useState(false);
   return (
-    <div className="w-full h-full">
-      <ARButton />
+    // <div className="w-full h-full">
+    //   <ARButton />
+    //   <Canvas>
+    //     <XR store={store}>
+    //       <ambientLight />
+    //       <pointLight position={[10, 10, 10]} />
+    //       <Suspense fallback={null}>
+    //         <Environment files={"/textures/photo_studio_01_1k.hdr"} />
+    //         {model === 1 && <ModelOne />}
+    //         {model === 2 && <ModelTwo />}
+    //         {model === 3 && <ModelThree />}
+    //       </Suspense>
+    //       <OrbitControls />
+    //     </XR>
+    //   </Canvas>
+    // </div>
+    <>
+      <button onClick={() => store.enterAR()}>Enter AR</button>
       <Canvas>
         <XR store={store}>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <Suspense fallback={null}>
-            <Environment files={"/textures/photo_studio_01_1k.hdr"} />
-            {model === 1 && <ModelOne />}
-            {model === 2 && <ModelTwo />}
-            {model === 3 && <ModelThree />}
-          </Suspense>
-          <OrbitControls />
+          <mesh
+            pointerEventsType={{ deny: "grab" }}
+            onClick={() => setRed(!red)}
+            position={[0, 1, -1]}
+          >
+            <boxGeometry />
+            <meshBasicMaterial color={red ? "red" : "blue"} />
+          </mesh>
         </XR>
       </Canvas>
-    </div>
+    </>
   );
 }
 
