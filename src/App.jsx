@@ -17,7 +17,7 @@ function App() {
   };
   return (
     <div className="w-screen h-screen bg-[#1a1a1a] text-white">
-      <Navbar openNav={openNav} closeNav={closeNav} setModel={setModel} />
+      {/* <Navbar openNav={openNav} closeNav={closeNav} setModel={setModel} /> */}
       <Scene />
     </div>
   );
