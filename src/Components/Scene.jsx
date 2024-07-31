@@ -1,12 +1,25 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { Model as ModelOne } from "./3d/ModelOne";
 import { Model as ModelTwo } from "./3d/ModelTwo";
 import { Model as ModelThree } from "./3d/ModelThree";
-import "@google/model-viewer";
+// import "@google/model-viewer";
 
 function Scene({ model, useAR }) {
+  const modelViewerRef = useRef();
+
+  useEffect(() => {
+    import("@google/model-viewer/dist/model-viewer")
+      .then(async () => {
+        if (modelViewerRef.current) {
+          modelViewerRef.current.setAttribute("activate-ar", "");
+          await modelViewerRef.current.activateAR();
+        }
+      })
+      .catch(console.error);
+  }, []);
+
   let modelUrl;
 
   switch (model) {
@@ -27,6 +40,7 @@ function Scene({ model, useAR }) {
     <div className="w-full h-full">
       {useAR ? (
         <model-viewer
+          ref={modelViewerRef}
           src={modelUrl}
           ar
           ar-modes="scene-viewer webxr quick-look"
