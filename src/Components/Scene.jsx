@@ -4,7 +4,6 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import { Model as ModelOne } from "./3d/ModelOne";
 import { Model as ModelTwo } from "./3d/ModelTwo";
 import { Model as ModelThree } from "./3d/ModelThree";
-import "@google/model-viewer";
 
 function Scene({ model, useAR }) {
   const modelViewerRef = useRef();
@@ -47,11 +46,16 @@ function Scene({ model, useAR }) {
           ar
           ar-modes="scene-viewer webxr quick-look"
           environment-image="neutral"
+          quick-look-browsers="safari chrome"
           shadow-intensity="1"
           camera-controls
           auto-rotate
           style={{ width: "100%", height: "100%" }}
-        ></model-viewer>
+        >
+          <button slot="ar-button" className="absolute top-20 right-4 z-10">
+            Activate AR
+          </button>
+        </model-viewer>
       ) : (
         <Canvas>
           <ambientLight />
