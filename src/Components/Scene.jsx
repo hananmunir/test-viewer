@@ -4,21 +4,23 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import { Model as ModelOne } from "./3d/ModelOne";
 import { Model as ModelTwo } from "./3d/ModelTwo";
 import { Model as ModelThree } from "./3d/ModelThree";
-// import "@google/model-viewer";
+import "@google/model-viewer";
 
 function Scene({ model, useAR }) {
   const modelViewerRef = useRef();
 
+  const activateAr = async () => {
+    if (modelViewerRef.current) {
+      modelViewerRef.current.setAttribute("activate-ar", "");
+      await modelViewerRef.current.activateAR();
+    }
+  };
+
   useEffect(() => {
-    import("@google/model-viewer/dist/model-viewer")
-      .then(async () => {
-        if (modelViewerRef.current) {
-          modelViewerRef.current.setAttribute("activate-ar", "");
-          await modelViewerRef.current.activateAR();
-        }
-      })
-      .catch(console.error);
-  }, []);
+    if (useAR) {
+      activateAr();
+    }
+  }, [useAR]);
 
   let modelUrl;
 
