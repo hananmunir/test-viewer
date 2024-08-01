@@ -46,7 +46,7 @@ function Scene({ model, useAR }) {
           ar
           ar-modes="scene-viewer webxr quick-look"
           environment-image="neutral"
-          quick-look-browsers="safari chrome"
+          //quick-look-browsers="safari chrome"
           shadow-intensity="1"
           camera-controls
           auto-rotate
