@@ -22,7 +22,7 @@ function App() {
       <Navbar openNav={openNav} closeNav={closeNav} setModel={setModel} />
       <button
         onClick={() => setUseAR(!useAR)}
-        className="absolute top-4 right-4 z-10"
+        className="absolute top-4 right-4 z-10 text-black"
       >
         Toggle AR
       </button>

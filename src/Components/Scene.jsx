@@ -52,7 +52,10 @@ function Scene({ model, useAR }) {
           auto-rotate
           style={{ width: "100%", height: "100%" }}
         >
-          <button slot="ar-button" className="absolute top-20 right-4 z-10">
+          <button
+            slot="ar-button"
+            className="absolute top-20 text-black right-4 z-10"
+          >
             Activate AR
           </button>
         </model-viewer>
