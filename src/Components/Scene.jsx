@@ -4,20 +4,32 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import { Model as ModelOne } from "./3d/ModelOne";
 import { Model as ModelTwo } from "./3d/ModelTwo";
 import { Model as ModelThree } from "./3d/ModelThree";
+import "@google/model-viewer";
 
 function Scene({ model, useAR }) {
   const modelViewerRef = useRef();
 
   const activateAr = async () => {
     if (modelViewerRef.current) {
-      modelViewerRef.current.setAttribute("activate-ar", "");
-      await modelViewerRef.current.activateAR();
+      console.log("Activating AR...");
+      try {
+        modelViewerRef.current.setAttribute("activate-ar", "");
+        await modelViewerRef.current.activateAR();
+        console.log("AR activated.");
+      } catch (error) {
+        console.error("Error activating AR:", error);
+      }
     }
   };
 
   useEffect(() => {
     if (useAR) {
-      activateAr();
+      import("@google/model-viewer/dist/model-viewer")
+        .then(() => {
+          console.log("Model Viewer loaded successfully.");
+          activateAr();
+        })
+        .catch((error) => console.error("Error loading model viewer:", error));
     }
   }, [useAR]);
 
@@ -46,11 +58,12 @@ function Scene({ model, useAR }) {
           ar
           ar-modes="scene-viewer webxr quick-look"
           environment-image="neutral"
-          //quick-look-browsers="safari chrome"
           shadow-intensity="1"
           camera-controls
           auto-rotate
           style={{ width: "100%", height: "100%" }}
+          onLoad={() => console.log("Model loaded:", modelUrl)}
+          onError={(error) => console.error("Model load error:", error)}
         >
           <button
             slot="ar-button"
