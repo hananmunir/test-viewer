@@ -24,12 +24,7 @@ function Scene({ model, useAR }) {
 
   useEffect(() => {
     if (useAR) {
-      import("@google/model-viewer/dist/model-viewer")
-        .then(() => {
-          console.log("Model Viewer loaded successfully.");
-          activateAr();
-        })
-        .catch((error) => console.error("Error loading model viewer:", error));
+      activateAr();
     }
   }, [useAR]);
 
@@ -50,24 +45,24 @@ function Scene({ model, useAR }) {
   }
 
   return (
-    <div className="w-full h-full">
+    <div className='w-full h-full'>
       {useAR ? (
         <model-viewer
           ref={modelViewerRef}
-          src={modelUrl}
+          src={"/1.glb"}
+          tone-mapping='neutral'
           ar
-          ar-modes="scene-viewer webxr quick-look"
-          environment-image="neutral"
-          shadow-intensity="1"
+          ar-modes='webxr scene-viewer quick-look'
           camera-controls
-          auto-rotate
+          poster='poster.webp'
+          shadow-intensity='1'
+          environment-image='neutral'
           style={{ width: "100%", height: "100%" }}
-          onLoad={() => console.log("Model loaded:", modelUrl)}
-          onError={(error) => console.error("Model load error:", error)}
         >
           <button
-            slot="ar-button"
-            className="absolute top-20 text-black right-4 z-10"
+            slot='ar-button'
+            id='ar-button'
+            className='absolute top-20 text-black bg-white right-4 z-10'
           >
             Activate AR
           </button>

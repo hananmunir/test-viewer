@@ -18,11 +18,11 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-[#1a1a1a] text-white">
+    <div className='w-screen h-screen bg-[#1a1a1a] text-white'>
       <Navbar openNav={openNav} closeNav={closeNav} setModel={setModel} />
       <button
         onClick={() => setUseAR(!useAR)}
-        className="absolute top-4 right-4 z-10 text-black"
+        className='absolute top-4 right-4 z-10 bg-white text-black'
       >
         Toggle AR
       </button>
